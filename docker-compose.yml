@@ -1,0 +1,9 @@
+models:
+    image: tp33/django
+    external_links:
+      -  mysql_baseball:database
+    volumes:
+      - ./BackEnd:/app
+    ports:
+      - "8003:8000"
+    command: bash -c "python manage.py makemigrations Players; python manage.py migrate Players; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/BackEnd/wsgi.py"

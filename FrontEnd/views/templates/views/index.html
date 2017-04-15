@@ -8,8 +8,9 @@
     <div id="away_team">
         Select Away Team:
         <select>
-            <option>Placeholder1</option>
-            <option>Placeholder2</option>
+            {% for team in teams %}
+                <option value={{team.id}}>{{team.team_name}}</option>
+            {% endfor %}
         </select>
         <table>
             <tr>
@@ -17,9 +18,16 @@
                 <th>Player Name</th>
                 <th>Position</th>
             </tr>
+            {% for i in range %}
             <tr>
-                <td>1</td>
-                <td></td>
+                <td>{{i}}</td>
+                <td>
+                    <select>
+                        {% for player in team %}
+                            <option value={{player.id}}>{{player.name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
                 <td>
                     <select>
                         <option>P</option>
@@ -35,6 +43,7 @@
                     </select>
                 </td>
             </tr>
+            {% endfor %}
             <tr>
                 <td>2</td>
                 <td></td>
@@ -185,8 +194,9 @@
     <div id="home_team">
         Select Home Team:
         <select>
-            <option>Placeholder1</option>
-            <option>Placeholder2</option>
+            {% for team in teams %}
+                <option value={{team.id}}>{{team.team_name}}</option>
+            {% endfor %}
         </select>
         <table>
             <tr>

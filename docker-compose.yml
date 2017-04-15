@@ -5,5 +5,25 @@ models:
     volumes:
       - ./BackEnd:/app
     ports:
-      - "8003:8000"
+      - "8005:8000"
     command: bash -c "pip install requests; pip install django; pip install djangorestframework; python manage.py makemigrations Players; python manage.py migrate Players; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/BackEnd/wsgi.py"
+
+buisness:
+    image: tp33/django
+    links:
+      -  models:models-api
+    volumes:
+      - ./MiddleLayer:/app
+    ports:
+      - "8004:8000"
+    command: bash -c "pip install requests; pip install django; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/MiddleLayer/wsgi.py"
+
+views:
+    image: tp33/django
+    links:
+      - buisness:buisness-api
+    volumes:
+      - ./FrontEnd:/app
+    ports:
+      - "8003:8000"
+    command: bash -c "pip install requests; pip install django; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/FrontEnd/wsgi.py"

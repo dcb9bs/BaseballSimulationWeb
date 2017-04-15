@@ -6,4 +6,4 @@ models:
       - ./BackEnd:/app
     ports:
       - "8003:8000"
-    command: bash -c "python manage.py makemigrations Players; python manage.py migrate Players; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/BackEnd/wsgi.py"
+    command: bash -c "pip install requests; pip install django; pip install djangorestframework; python manage.py makemigrations Players; python manage.py migrate Players; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/BackEnd/wsgi.py"

@@ -26,4 +26,4 @@ views:
       - ./FrontEnd:/app
     ports:
       - "8003:8000"
-    command: bash -c "pip install requests; pip install django; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/FrontEnd/wsgi.py"
+    command: bash -c "pip install django-static-jquery==2.1.4; python manage.py collectstatic --noinput; pip install requests; pip install django; mod_wsgi-express start-server --working-directory /app --reload-on-changes /app/FrontEnd/wsgi.py"

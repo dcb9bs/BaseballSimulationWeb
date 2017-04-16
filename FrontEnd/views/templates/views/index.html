@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Run a Simulation</title>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'views/index.js' %}"></script>
 </head>
 <body>
     <div id="away_team">
         Select Away Team:
-        <select>
+        <select id="away_team_select">
             {% for team in teams %}
                 <option value={{team.id}}>{{team.team_name}}</option>
             {% endfor %}
@@ -21,10 +24,10 @@
             {% for i in range %}
             <tr>
                 <td>{{i}}</td>
-                <td>
+                <td id="away_player{{i}}">
                     <select>
                         {% for player in team %}
-                            <option value={{player.id}}>{{player.name}}</option>
+                            <option value={{player.id}}>{{player.full_name}}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -44,156 +47,21 @@
                 </td>
             </tr>
             {% endfor %}
-            <tr>
-                <td>2</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
+
         </table>
+        <div id="away_pitcher">
+            Pitcher:
+            <select id="away_pitcher_select">
+                {% for player in team %}
+                    <option value={{player.id}}>{{player.full_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
 
     <div id="home_team">
         Select Home Team:
-        <select>
+        <select id="home_team_select">
             {% for team in teams %}
                 <option value={{team.id}}>{{team.team_name}}</option>
             {% endfor %}
@@ -204,9 +72,16 @@
                 <th>Player Name</th>
                 <th>Player Position</th>
             </tr>
+            {% for i in range %}
             <tr>
-                <td>1</td>
-                <td></td>
+                <td>{{i}}</td>
+                <td id="home_player{{i}}">
+                    <select>
+                        {% for player in team %}
+                            <option value={{player.id}}>{{player.full_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
                 <td>
                     <select>
                         <option>P</option>
@@ -222,151 +97,18 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td></td>
-                <td>
-                    <select>
-                        <option>P</option>
-                        <option>C</option>
-                        <option>1B</option>
-                        <option>2B</option>
-                        <option>3B</option>
-                        <option>SS</option>
-                        <option>LF</option>
-                        <option>CF</option>
-                        <option>RF</option>
-                        <option>DH</option>
-                    </select>
-                </td>
-            </tr>
+            {% endfor %}
         </table>
+
+        <div id="home_pitcher">
+            Pitcher:
+            <select id="home_pitcher_select">
+                {% for player in team %}
+                    <option value={{player.id}}>{{player.full_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
     </div>
 
 </body>

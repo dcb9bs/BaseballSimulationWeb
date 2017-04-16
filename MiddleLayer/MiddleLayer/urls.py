@@ -20,5 +20,6 @@ from ExperienceService import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^GetAllTeams', views.GetAllTeams)
+    url(r'^GetAllTeams', views.GetAllTeams),
+    url(r'^GetPlayersFromTeam/(?P<pk>[0-9]+)$', views.GetPlayersFromTeam),
 ]

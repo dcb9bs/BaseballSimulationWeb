@@ -8,7 +8,7 @@ $(document).ready(function() {
             var i, j;
             var team = data['team'];
             for(j = 1; j < 10; j++){
-                var name = "#away_player" + j;
+                var name = "#away_player_" + j;
                 $(name).empty();
                 var append_string = "<select>";
                 for(i = 0; i < team.length; i++){
@@ -27,7 +27,7 @@ $(document).ready(function() {
             var i, j;
             var team = data['team'];
             for(j = 1; j < 10; j++){
-                var name = "#home_player" + j;
+                var name = "#home_player_" + j;
                 $(name).empty();
                 var append_string = "<select>";
                 for(i = 0; i < team.length; i++){

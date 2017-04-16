@@ -25,7 +25,7 @@
             {% for i in range %}
             <tr>
                 <td>{{i}}</td>
-                <td id="away_player{{i}}">
+                <td id="away_player_{{i}}">
                     <select>
                         {% for player in team %}
                             <option value={{player.id}}>{{player.full_name}}</option>
@@ -76,7 +76,7 @@
             {% for i in range %}
             <tr>
                 <td>{{i}}</td>
-                <td id="home_player{{i}}">
+                <td id="home_player_{{i}}">
                     <select>
                         {% for player in team %}
                             <option value={{player.id}}>{{player.full_name}}</option>

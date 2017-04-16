@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
-from .models import Team, Player
+from .models import Team, Player, Batter
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
-from .serializers import TeamSerializer, PlayerSerializer
+from .serializers import TeamSerializer, PlayerSerializer, BatterSerializer
 
 
 class TeamList(APIView):
@@ -70,7 +70,7 @@ class PlayerList(APIView):
         try:
             players = Player.objects.all().filter(team_id=team.id).values('id', 'first_name', 'last_name')
         except Player.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'No players on this team' })
+            return JsonResponse({'status': 'error', 'message': 'No players on this team'})
 
         if len(players) > 0:
             return JsonResponse({'status': 'success', 'players': list(players)})
@@ -127,3 +127,57 @@ class PlayerDetail(APIView):
         player.delete()
         return JsonResponse({'status': 'success',
                              'message': player_first_name + ' ' + player_last_name + ' was deleted.'})
+
+
+class BatterList(APIView):
+    # @csrf_exempt
+    # def get(self, request, pk):
+    #     # get all batters on a team
+    #     try:
+    #         team = Team.objects.get(id=pk)
+    #     except Team.DoesNotExist:
+    #         return JsonResponse({'status': 'error', 'message': 'This team does not exist'})
+    #
+    #     try:
+    #         players = Player.objects.all().filter(team_id=team.id).values('id', 'first_name', 'last_name')
+    #     except Player.DoesNotExist:
+    #         return JsonResponse({'status': 'error', 'message': 'No players on this team'})
+    #
+    #     return_list = []
+    #     if len(players) > 0:
+    #         for player in players:
+    #             p = model_to_dict(player)
+    #             try:
+    #                 batter = Batter.objects.get(player_id=p)
+    #                 p['stats'] = model_to_dict(batter)
+    #                 return_list.append(p)
+    #             except Batter.DoesNotExist:
+    #                 continue
+    #
+    #         return JsonResponse({'status': 'success', 'players': p})
+    #     else:
+    #         return JsonResponse({'status': 'error', 'message': 'No batters on this team'})
+
+    @csrf_exempt
+    def post(self, request, pk):
+        # given a player ID create a batter associated with that player
+        try:
+            player = Player.objects.get(id=pk)
+        except Player.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'The player whose id you entered does not exist'})
+
+        try:
+            Batter.objects.get(player_id=pk)
+            return JsonResponse({'status': 'error',
+                                 'message': 'A batter model has already been created for this player'})
+        except Batter.DoesNotExist:
+            serialized_batter = BatterSerializer(data=request.data)
+            if serialized_batter.is_valid():
+                serialized_batter.save(player_id=pk)
+                try:
+                    batter = Batter.objects.get(player_id=pk)
+                except Batter.DoesNotExist:
+                    return JsonResponse({'status': 'error', 'message': 'Batter was not created successfully.'})
+
+                return JsonResponse({'status': 'success', 'batter': model_to_dict(batter),
+                                     'message': player.first_name + ' ' + player.last_name + ' now has batter data'})

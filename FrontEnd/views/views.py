@@ -2,6 +2,7 @@ from django.shortcuts import render
 import requests
 from django.http import JsonResponse
 
+
 def teamSelect(request):
     teams = requests.get('http://buisness-api:8000/GetAllTeams')
     teams_json = teams.json()

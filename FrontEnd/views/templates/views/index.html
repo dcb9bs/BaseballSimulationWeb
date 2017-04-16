@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Run a Simulation</title>
     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
     <script type="text/javascript" src="{% static 'static_jquery/js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'views/index.js' %}"></script>
 </head>
 <body>
-    <div id="away_team">
+    <div id="away_team" class="float-left">
         Select Away Team:
         <select id="away_team_select">
             {% for team in teams %}
@@ -59,7 +60,7 @@
         </div>
     </div>
 
-    <div id="home_team">
+    <div id="home_team" class="float-right">
         Select Home Team:
         <select id="home_team_select">
             {% for team in teams %}

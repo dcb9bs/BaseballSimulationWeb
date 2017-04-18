@@ -130,33 +130,35 @@ class PlayerDetail(APIView):
 
 
 class BatterList(APIView):
-    # @csrf_exempt
-    # def get(self, request, pk):
-    #     # get all batters on a team
-    #     try:
-    #         team = Team.objects.get(id=pk)
-    #     except Team.DoesNotExist:
-    #         return JsonResponse({'status': 'error', 'message': 'This team does not exist'})
-    #
-    #     try:
-    #         players = Player.objects.all().filter(team_id=team.id).values('id', 'first_name', 'last_name')
-    #     except Player.DoesNotExist:
-    #         return JsonResponse({'status': 'error', 'message': 'No players on this team'})
-    #
-    #     return_list = []
-    #     if len(players) > 0:
-    #         for player in players:
-    #             p = model_to_dict(player)
-    #             try:
-    #                 batter = Batter.objects.get(player_id=p)
-    #                 p['stats'] = model_to_dict(batter)
-    #                 return_list.append(p)
-    #             except Batter.DoesNotExist:
-    #                 continue
-    #
-    #         return JsonResponse({'status': 'success', 'players': p})
-    #     else:
-    #         return JsonResponse({'status': 'error', 'message': 'No batters on this team'})
+    @csrf_exempt
+    def get(self, request, pk):
+        # get all batters on a team
+        try:
+            team = Team.objects.get(id=pk)
+        except Team.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'This team does not exist'})
+
+        try:
+            players = Player.objects.all().filter(team_id=pk).values_list('id', 'first_name',
+                                                                          'last_name', 'team_id').order_by('id')
+        except Player.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'No players on this team'})
+
+        return_list = []
+        if len(players) > 0:
+            for player in players:
+                return_dict = {'id': player[0], 'first_name': player[1], 'last_name': player[2], 'team_id': player[3]}
+                p = player[0]
+                try:
+                    batter = Batter.objects.get(player_id=p)
+                    return_dict['stats'] = model_to_dict(batter)
+                    return_list.append(return_dict)
+                except Batter.DoesNotExist:
+                    continue
+
+            return JsonResponse({'status': 'success', 'players': return_list})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'No batters on this team'})
 
     @csrf_exempt
     def post(self, request, pk):

@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'^api/v1/players/(?P<pk>[0-9]+)$', players.PlayerList.as_view()),
     url(r'^api/v1/player/(?P<pk>[0-9]+)$', players.PlayerDetail.as_view()),
     url(r'^api/v1/batters/(?P<pk>[0-9]+)$', players.BatterList.as_view()),
+    url(r'^api/v1/batter/(?P<pk>[0-9]+)$', players.BatterDetail.as_view()),
+    url(r'^api/v1/pitchers/(?P<pk>[0-9]+)$', players.PitcherList.as_view()),
+    url(r'^api/v1/pitcher/(?P<pk>[0-9]+)$', players.PitcherDetail.as_view()),
 ]

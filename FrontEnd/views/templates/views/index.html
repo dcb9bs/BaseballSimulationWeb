@@ -25,10 +25,10 @@
             {% for i in range %}
             <tr>
                 <td>{{i}}</td>
-                <td id="away_player_{{i}}">
+                <td id="away_batter_{{i}}">
                     <select>
-                        {% for player in team %}
-                            <option value={{player.id}}>{{player.full_name}}</option>
+                        {% for batter in batters %}
+                            <option value={{batter.id}}>{{batter.full_name}}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -53,8 +53,8 @@
         <div id="away_pitcher">
             Pitcher:
             <select id="away_pitcher_select">
-                {% for player in team %}
-                    <option value={{player.id}}>{{player.full_name}}</option>
+                {% for pitcher in pitchers %}
+                    <option value={{pitcher.id}}>{{pitcher.full_name}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -76,10 +76,10 @@
             {% for i in range %}
             <tr>
                 <td>{{i}}</td>
-                <td id="home_player_{{i}}">
+                <td id="home_batter_{{i}}">
                     <select>
-                        {% for player in team %}
-                            <option value={{player.id}}>{{player.full_name}}</option>
+                        {% for batter in batters %}
+                            <option value={{batter.id}}>{{batter.full_name}}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -104,8 +104,8 @@
         <div id="home_pitcher">
             Pitcher:
             <select id="home_pitcher_select">
-                {% for player in team %}
-                    <option value={{player.id}}>{{player.full_name}}</option>
+                {% for pitcher in pitchers %}
+                    <option value={{pitcher.id}}>{{pitcher.full_name}}</option>
                 {% endfor %}
             </select>
         </div>

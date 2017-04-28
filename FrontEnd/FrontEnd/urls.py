@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.teamSelect),
     url(r'^updateTeamSelect/(?P<pk>[0-9]+)$', views.updateTeamSelect),
+    url(r'^createTeam', views.createTeam),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

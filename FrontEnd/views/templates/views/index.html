@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "./navbar.html" %}
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Run a Simulation</title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
-    <script type="text/javascript" src="{% static 'static_jquery/js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'views/index.js' %}"></script>
 </head>
 <body>
+    <div id="content" class="main-window">
     <div id="away_team" class="float-left">
         Select Away Team:
         <select id="away_team_select">
@@ -109,8 +108,11 @@
                 {% endfor %}
             </select>
         </div>
-
+        <br>
+    <button id="run" class="button">Run Simulation</button>
+    </div>
+        <div class="clear"></div>
     </div>
 
 </body>
-</html>
+{% endblock %}

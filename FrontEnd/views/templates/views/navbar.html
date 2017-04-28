@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+    <script type="text/javascript" src="{% static 'static_jquery/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'views/navbar.js' %}"></script>
+
+</head>
+<body>
+<div id="navbar" class="navbar">
+    <ul>
+        <li class="active"><a href="/">Run Simulation</a> </li>
+        <li><a href="/createTeam">Create</a></li>
+        <li><a href="">View</a></li>
+    </ul>
+
+</div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

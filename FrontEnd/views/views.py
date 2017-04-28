@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import ensure_csrf_cookie
 import requests
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from .form import TeamForm
 
 
 def teamSelect(request):
@@ -25,7 +27,32 @@ def updateTeamSelect(request, pk):
     url = 'http://buisness-api:8000/GetBattersFromTeam/' + str(pk)
     batters = requests.get(url)
     batters_json = batters.json()
+    team_data = {}
+    if batters_json['status'] == 'error' and batters_json['message'] == 'No batters on this team':
+        team_data['batters'] = []
+    else:
+        team_data['batters'] = batters_json['team']
     pitcher_url = 'http://buisness-api:8000/GetPitchersFromTeam/' + str(pk)
     pitchers = requests.get(pitcher_url)
     pitchers_json = pitchers.json()
-    return JsonResponse({'batters': batters_json['team'], 'pitchers': pitchers_json['team']})
+    if pitchers_json['status'] == 'error' and pitchers_json['message'] == 'No pitchers on this team':
+        team_data['pitchers'] = []
+    else:
+        team_data['pitchers'] = pitchers_json['team']
+    return JsonResponse(team_data)
+
+
+@ensure_csrf_cookie
+def createTeam(request):
+    if request.method == 'POST':
+        form = TeamForm(request.POST)
+        if form.is_valid():
+            payload = {'team_name': request.POST.get('team_name'), 'professional': request.POST.get('professional')}
+            req = requests.post('http://buisness-api:8000/createTeam', data=payload)
+            req_json = req.json()
+
+            return HttpResponseRedirect("/", req_json)
+    else:
+        form = TeamForm()
+
+    return render(request, "views/newTeam.html", {'form': form})

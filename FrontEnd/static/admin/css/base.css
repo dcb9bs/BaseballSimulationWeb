@@ -17,34 +17,52 @@ body {
     margin: 0px;
     padding: 0;
     width: 20%;
-    background-color: #a9a9a9;
+
     position: fixed;
     height: 100%;
     overflow: auto;
 }
 ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
-    width: 20%;
-    position: fixed;
+    width: 200px;
+    background-color: #a9a9a9;
+    height: 100%;
+
+
 }
 
-li a {
+a {
     display: block;
-    color: #ffffff;
-    padding: 8px 16px;
+    padding: 10px;
     text-decoration: none;
+    color: #ffffff;
 }
 
-li.active {
+a:hover {
+
+    color: #ffffff;
+}
+
+
+li .dropdown {
+    position: relative;
+}
+
+li:hover .dropdown{
+    display: block;
+
+}
+
+li:hover {
     background-color: #FF3B3F;
     color: #ffffff;
-    font-weight: bolder;
 }
 
-li:hover:not(.active) {
-    background-color: #CAEBF2;
-    color: #003366;
+.dropdown {
+
+    display: none;
 }
 
 
@@ -56,7 +74,7 @@ a:link, a:visited {
 }
 
 a:focus, a:hover {
-    color: #036;
+    /*color: #036;*/
 }
 
 a:focus {

@@ -25,4 +25,8 @@ urlpatterns = [
     url(r'^GetBattersFromTeam/(?P<pk>[0-9]+)$', views.GetBattersFromTeam),
     url(r'^GetPitchersFromTeam/(?P<pk>[0-9]+)$', views.GetPitchersFromTeam),
     url(r'^createTeam', views.createTeam),
+    url(r'^addToRoster/(?P<pk>[0-9]+)$', views.addToRoster),
+    url(r'^GetTeam/(?P<pk>[0-9]+)$', views.GetTeam),
+    url(r'^GetAllPlayers', views.GetAllPlayers),
+    url(r'^GetPlayerData/(?P<pk>[0-9]+)$', views.GetPlayerData),
 ]

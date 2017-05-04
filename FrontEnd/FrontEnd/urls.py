@@ -24,6 +24,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.teamSelect),
     url(r'^updateTeamSelect/(?P<pk>[0-9]+)$', views.updateTeamSelect),
-    url(r'^createTeam', views.createTeam),
+    url(r'^create/team', views.createTeam),
+    url(r'^create/roster', views.createRoster),
+    url(r'^teams', views.viewTeams),
+    url(r'^team/(?P<pk>[0-9]+)$', views.viewTeam),
+    url(r'^players', views.viewPlayers),
+    url(r'^player/(?P<pk>[0-9]+)$', views.viewPlayer),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

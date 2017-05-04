@@ -1,0 +1,73 @@
+{% extends "./navbar.html" %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fill out a Team's Roster</title>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'views/roster.js' %}"></script>
+</head>
+
+<body>
+    <div id="content" class="main-window">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <h2>Select a Team</h2>
+                <select id="team_select" name="team_select">
+                    {% for team in teams %}
+                    <option value={{team.id}}>{{team.team_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div id="currentRoster">
+                <h2>Current Roster</h2>
+                <div id="pitchers" class="float-left">
+                    <table>
+                        <th>Pitchers</th>
+                        {% for pitcher in pitchers %}
+                        <tr><td value="{{pitcher.id}}">{{pitcher.full_name}}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <div id="batters" class="float-right">
+                    <table>
+                        <th>Batters</th>
+                        {% for batter in batters %}
+                        <tr><td value="{{batter.id}}">{{batter.full_name}}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="clear"></div>
+                <br>
+            </div>
+
+            <div id="addNewPlayer">
+                    <h2>Add a Player to the Roster</h2>
+                    <table>{{ playerForm.as_table }}</table>
+                    <table>
+                        <tr>
+                            <td>Is a pitcher: <input id="pitcher_checkbox" type="checkbox" value="pitcher"></td>
+                            <td></td>
+                            <td>Is a batter: <input id="batter_checkbox" type="checkbox" value="batter"></td>
+                        </tr>
+                    </table>
+
+
+                    <div id="pitcherForm" class="float-left">
+                        <table>{{ pitcherForm.as_table }}</table>
+                    </div>
+                    <div id="batterForm" class="float-right">
+                        <table>{{ batterForm.as_table }}</table>
+                    </div>
+                    <div class="clear"></div>
+
+            </div>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+</body>
+{% endblock %}

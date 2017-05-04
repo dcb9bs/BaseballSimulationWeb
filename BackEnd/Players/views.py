@@ -217,10 +217,21 @@ class BatterDetail(APIView):
                              'message': player_first_name + ' ' + player_last_name + "'s batting stats were deleted."})
 
 
+class PlayerBatterDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        # get batter data given a player's id
+        try:
+            batter = Batter.objects.get(player_id=pk)
+        except Batter.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'No batter data for this player'})
+        return JsonResponse({'status': 'success', 'batter': model_to_dict(batter)})
+
+
 class PitcherList(APIView):
     @csrf_exempt
     def get(self, request, pk):
-        # get all batters on a team
+        # get all pitchers on a team
         try:
             Team.objects.get(id=pk)
         except Team.DoesNotExist:
@@ -244,14 +255,13 @@ class PitcherList(APIView):
                 except Pitcher.DoesNotExist:
                     continue
 
-
             return JsonResponse({'status': 'success', 'pitchers': return_list})
         else:
             return JsonResponse({'status': 'error', 'message': 'No pitchers on this team'})
 
     @csrf_exempt
     def post(self, request, pk):
-        # given a player ID create a batter associated with that player
+        # given a player ID create a pitcher associated with that player
         try:
             player = Player.objects.get(id=pk)
         except Player.DoesNotExist:
@@ -306,3 +316,14 @@ class PitcherDetail(APIView):
         pitcher.delete()
         return JsonResponse({'status': 'success',
                              'message': player_first_name + ' ' + player_last_name + "'s pitching stats were deleted."})
+
+
+class PlayerPitcherDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        # get pitcher data given a player's id
+        try:
+            pitcher = Pitcher.objects.get(player_id=pk)
+        except Pitcher.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'No pitcher data for this player'})
+        return JsonResponse({'status': 'success', 'pitcher': model_to_dict(pitcher)})

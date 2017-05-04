@@ -1,0 +1,102 @@
+{% extends "./navbar.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View {{player.full_name}}</title>
+</head>
+<body>
+    <div id="content" class="main-window">
+        <h4>{{errors}}</h4>
+        <div id="player">
+            <h1>{{player.full_name}}</h1>
+            <div id="stats">
+                <table>
+                    <tr>
+                        <td>SLG%</td>
+                        <td>{{player.slugging}}</td>
+                    </tr>
+                    <tr>
+                        <td>OBP%</td>
+                        <td>{{player.on_base}}</td>
+                    </tr>
+                    <tr>
+                        <td>AVG</td>
+                        <td>{{player.batting_avg}}</td>
+                    </tr>
+                </table>
+
+            </div>
+            <div id="pitchers" class="float-left">
+                <table>
+                    <th>Pitcher Data</th>
+                    <tr>
+                        <td>BB & HBP</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_free_bases}}</td>
+                    </tr>
+                    <tr>
+                        <td>1B</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_singles}}</td>
+                    </tr>
+                    <tr>
+                        <td>2B</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_doubles}}</td>
+                    </tr>
+                    <tr>
+                        <td>3B</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_triples}}</td>
+                    </tr>
+                    <tr>
+                        <td>HR</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_homeruns}}</td>
+                    </tr>
+                    <tr>
+                        <td>SO</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_strikeouts}}</td>
+                    </tr>
+                    <tr>
+                        <td>AB</td>
+                        <td value="{{pitcher.id}}">{{pitcher.opponents_at_bats}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="batters" class="float-right">
+                <table>
+                    <th>Batter Data</th>
+                    <tr>
+                        <td>BB & HBP</td>
+                        <td value="{{batter.id}}">{{batter.free_bases}}</td>
+                    </tr>
+                    <tr>
+                        <td>1B</td>
+                        <td value="{{batter.id}}">{{batter.singles}}</td>
+                    </tr>
+                    <tr>
+                        <td>2B</td>
+                        <td value="{{batter.id}}">{{batter.doubles}}</td>
+                    </tr>
+                    <tr>
+                        <td>3B</td>
+                        <td value="{{batter.id}}">{{batter.triples}}</td>
+                    </tr>
+                    <tr>
+                        <td>HR</td>
+                        <td value="{{batter.id}}">{{batter.homeruns}}</td>
+                    </tr>
+                    <tr>
+                        <td>SO</td>
+                        <td value="{{batter.id}}">{{batter.strikeouts}}</td>
+                    </tr>
+                    <tr>
+                        <td>AB</td>
+                        <td value="{{batter.id}}">{{batter.at_bats}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clear"></div>
+            <br>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

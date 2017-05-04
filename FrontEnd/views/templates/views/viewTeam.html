@@ -1,0 +1,38 @@
+{% extends "./navbar.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View Team</title>
+</head>
+<body>
+    <div id="content" class="main-window">
+        <h4>{{errors}}</h4>
+        <div id="currentRoster">
+            <h1>{{team.team_name}}</h1>
+            <h2>Roster</h2>
+            <div id="pitchers" class="float-left">
+                <table>
+                    <th>Pitchers</th>
+                    {% for pitcher in pitchers %}
+                    <tr>
+                        <td value="{{pitcher.id}}">{{pitcher.full_name}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div id="batters" class="float-right">
+                <table>
+                    <th>Batters</th>
+                    {% for batter in batters %}
+                    <tr><td value="{{batter.id}}">{{batter.full_name}}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="clear"></div>
+            <br>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

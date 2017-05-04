@@ -17,57 +17,52 @@ body {
     margin: 0px;
     padding: 0;
     width: 20%;
-
     position: fixed;
     height: 100%;
     overflow: auto;
 }
-ul {
+
+.navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 200px;
     background-color: #a9a9a9;
     height: 100%;
-
-
 }
 
-a {
+.navbar a {
     display: block;
     padding: 10px;
     text-decoration: none;
     color: #ffffff;
 }
 
-a:hover {
-
+.navbar a:hover {
     color: #ffffff;
 }
 
-
-li .dropdown {
+.navbar li .dropdown {
     position: relative;
 }
 
-li:hover .dropdown{
+.navbar li:hover .dropdown{
     display: block;
-
 }
 
-li:hover {
+.navbar li:hover {
     background-color: #FF3B3F;
     color: #ffffff;
 }
 
-.dropdown {
-
+.navbar .dropdown {
     display: none;
 }
 
 
 /* LINKS */
-
+li {
+    list-style-type: none;
+}
 a:link, a:visited {
     /*color: #447e9b;*/
     text-decoration: none;
@@ -134,6 +129,7 @@ h3 {
 }
 
 h4 {
+    color: #FF3B3F;
     font-size: 12px;
     margin: 1em 0 .8em 0;
     padding-bottom: 3px;

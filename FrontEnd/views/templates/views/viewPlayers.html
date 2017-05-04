@@ -1,0 +1,23 @@
+{% extends "./navbar.html" %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>View All Players</title>
+</head>
+<body>
+    <div id="content" class="main-window">
+        <h4>{{errors}}</h4>
+        <h2>All Players</h2>
+        <div id="players">
+            <table>
+                <th>Full Name</th>
+                {% for player in players %}
+                <tr>
+                    <td><li><a href="/player/{{player.id}}">{{player.full_name}}</a></li></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+{% endblock %}

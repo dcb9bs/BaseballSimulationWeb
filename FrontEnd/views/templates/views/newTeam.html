@@ -6,12 +6,27 @@
 </head>
 <body>
     <div id="content" class="main-window">
-        <form action="" method="post">
-            {% csrf_token %}
-            <table>{{ form.as_table }}</table>
+        <h2>Create a New Team</h2>
+        <div id="createTeam">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>{{ form.as_table }}</table>
+                <input type="submit" value="Submit" />
+            </form>
+        <br>
+        </div>
 
-            <input type="submit" value="Submit" />
-        </form>
+        <div id="currentTeam">
+            <h2>Teams Already Created</h2>
+            <table>
+                <th>Current Teams</th>
+                {% for team in teams %}
+                <tr><td value="{{team.id}}">{{team.team_name}}</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
     </div>
 
 </body>
